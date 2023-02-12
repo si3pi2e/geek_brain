@@ -1,5 +1,6 @@
 from random import choice
 import requests
+import json
 
 
 def send_req(url: str):
@@ -11,7 +12,7 @@ def send_req(url: str):
     return repo_list
 
 
-def parse_name_repositories_to_file(usr: str, data: list):
+def write_to_file(usr: str, data: list):
     with open(f'repo_{usr}.txt', 'w') as file:
         file.write(f'У пользователя GitHub "{usr}" имеются следующие репозитории:\n')
         file.write('\n'.join(data))
@@ -26,4 +27,4 @@ path_user = f'/users/{user}'
 path_repo = f'/users/{user}/repos'
 
 if __name__ == '__main__':
-    parse_name_repositories_to_file(user, send_req(url_api+path_repo))
+    write_to_file(user, send_req(url_api + path_repo))
